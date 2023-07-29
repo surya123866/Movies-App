@@ -1,0 +1,17 @@
+.Trending-now-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 1356px;
+  background-color: #131313;
+}
+.Trending-now-text {
+  color: #ffffff;
+  font-family: HK Grotesk;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-top: 48px;
+  margin-left: 116px;
+}

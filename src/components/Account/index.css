@@ -1,0 +1,141 @@
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: rgba(19, 19, 19, 1);
+}
+.account-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100vw;
+  background-color: #ffff;
+  padding: 70px;
+}
+.account-details-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
+.line {
+  color: blue;
+  width: 100%;
+}
+.header {
+  color: #131313;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: 'hK Grotesk';
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  align-self: flex-start;
+}
+.memberShip-container {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  margin-left: 500px;
+}
+.membership-details-container {
+  margin-bottom: 20px;
+}
+.membership-text {
+  color: #94a3b8;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: 'HK Grotesk';
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 10px;
+  margin-top: 25px;
+}
+.mail-text {
+  color: #1e293b;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: HK Grotesk;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.password-text {
+  color: var(--light-blue-gray-500, #64748b);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: HK Grotesk;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.plan-container {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  margin-left: 500px;
+}
+.plan-details-container {
+  display: flex;
+  justify-content: center;
+}
+.planDetails-text {
+  color: #94a3b8;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: 'HK Grotesk';
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 10px;
+  margin-top: 25px;
+}
+.plan-type-text {
+  color: #1e293b;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: 'HK Grotesk';
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.Quality-text {
+  padding: 5px;
+  border: solid #1e293b 2px;
+  color: #1e293b;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: 'HK Grotesk';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  justify-self: center;
+  align-self: center;
+  margin: 10px;
+}
+.logOut-button {
+  color: #fff;
+  text-align: center;
+  font-family: 'HK Grotesk';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 150% */
+  display: inline-flex;
+  padding: 8px 20px;
+  align-items: center;
+  display: inline-flex;
+  padding: 8px 20px;
+  align-items: center;
+  margin-top: 50px;
+  border-radius: 4px;
+  background-color: #e50914;
+  border: none;
+}

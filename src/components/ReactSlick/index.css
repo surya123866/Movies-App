@@ -1,0 +1,25 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  background-color: #131313;
+}
+
+.slick-container {
+  width: 80%;
+  max-width: 1100px;
+  margin-top: 10px;
+}
+
+.logo-image {
+  margin: 0px 10px;
+  height: 100px;
+  width: 100px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: white;
+}
