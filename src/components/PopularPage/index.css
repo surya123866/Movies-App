@@ -1,25 +1,20 @@
-.main-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  width: 100vw;
-  background-color: #181818;
+.popular-container {
+  background-color: black;
 }
-.popular-movies-images-container {
+.popular-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding-left: 32px;
+  padding-right: 19px;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
-  width: 1400px;
-  min-height: 500px;
+  margin-top: 8px;
 }
-.image {
-  width: 255px;
-  height: 167px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  margin: 20px;
+@media (min-width: 768px) {
+  .popular-list {
+    margin-top: 32px;
+    padding-left: 165px;
+    padding-right: 135px;
+  }
 }

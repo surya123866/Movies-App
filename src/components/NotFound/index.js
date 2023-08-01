@@ -1,11 +1,11 @@
 import {Link} from 'react-router-dom'
-import './pageNotFound.css'
+import './index.css'
 
-const PageNotFound = () => (
-  <div className="main-container">
-    <h1 className="LostYourWay">LostYourWay</h1>
+const NotFound = () => (
+  <div className="Not-Found-container">
+    <h1 className="LostYourWay">Lost Your Way</h1>
     <p className="description">
-      we are sorry the page you requested could not be found?
+      we are sorry, the page you requested could not be found
       <br />
       Please go back to the homepage.
     </p>
@@ -16,4 +16,4 @@ const PageNotFound = () => (
     </Link>
   </div>
 )
-export default PageNotFound
+export default NotFound

@@ -1,21 +1,28 @@
-import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
 import './App.css'
-import Login from './components/LoginPage'
+import ProtectedRoute from './components/ProtectedRoute'
+import Login from './components/Login'
 import Account from './components/Account'
 import PopularPage from './components/PopularPage'
 import SearchInput from './components/SearchInput'
 import HomePage from './components/HomePage'
-import NotFound from './components/PageNotFound'
+import NotFound from './components/NotFound'
+import MovieItemDetailsView from './components/MovieItemDetailsView'
 
 const App = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/login" component={Login} />
-      <Route exact path="/" component={HomePage} />
-      <Route exact path="/searchInput" component={SearchInput} />
-      <Route exact path="/popular" component={PopularPage} />
-      <Route exact path="/account" component={Account} />
+      <ProtectedRoute exact path="/" component={HomePage} />
+      <ProtectedRoute exact path="/account" component={Account} />
+      <ProtectedRoute exact path="/search" component={SearchInput} />
+      <ProtectedRoute exact path="/popular" component={PopularPage} />
+      <ProtectedRoute
+        exact
+        path="/movies/:id"
+        component={MovieItemDetailsView}
+      />
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>

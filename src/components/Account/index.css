@@ -1,141 +1,147 @@
-.main-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  min-height: 100vh;
-  width: 100vw;
-  background-color: rgba(19, 19, 19, 1);
-}
 .account-container {
+  height: 70vh;
+  padding-top: 32px;
+  padding-right: 32px;
+  padding-left: 32px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  width: 100vw;
-  background-color: #ffff;
-  padding: 70px;
+  background-color: #e5e5e5;
 }
-.account-details-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 60%;
-}
-.line {
-  color: blue;
-  width: 100%;
-}
-.header {
-  color: #131313;
-  font-feature-settings: 'clig' off, 'liga' off;
-  font-family: 'hK Grotesk';
-  font-size: 36px;
+
+.heading {
+  font-family: 'Roboto';
   font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  align-self: flex-start;
-}
-.memberShip-container {
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
-  margin-left: 500px;
-}
-.membership-details-container {
-  margin-bottom: 20px;
-}
-.membership-text {
-  color: #94a3b8;
-  font-feature-settings: 'clig' off, 'liga' off;
-  font-family: 'HK Grotesk';
+  font-weight: 500;
   font-size: 24px;
+  line-height: 28px;
+  color: #131313;
+  margin-bottom: 8px;
+}
+.header-sec {
+  background-color: black;
+}
+
+.hz-line {
+  border: none;
+  border-top: 3px solid #cbd5e1;
+  border-radius: 10px;
+  margin-bottom: 24px;
+}
+
+.membership-container {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.member-details {
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
-  margin: 10px;
-  margin-top: 25px;
+  font-size: 18px;
+  line-height: 23px;
+  color: #94a3b8;
+  margin-right: 11px;
 }
-.mail-text {
+
+.username {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
   color: #1e293b;
-  font-feature-settings: 'clig' off, 'liga' off;
-  font-family: HK Grotesk;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  margin-bottom: 6px;
 }
-.password-text {
-  color: var(--light-blue-gray-500, #64748b);
-  font-feature-settings: 'clig' off, 'liga' off;
-  font-family: HK Grotesk;
-  font-size: 24px;
+.password {
+  font-family: 'Roboto';
   font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  color: #64748b;
 }
-.plan-container {
+.password-container {
   display: flex;
-  justify-content: flex-start;
-  width: 100%;
-  margin-left: 500px;
+  align-items: center;
 }
 .plan-details-container {
   display: flex;
-  justify-content: center;
-}
-.planDetails-text {
-  color: #94a3b8;
-  font-feature-settings: 'clig' off, 'liga' off;
-  font-family: 'HK Grotesk';
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  margin: 10px;
-  margin-top: 25px;
-}
-.plan-type-text {
-  color: #1e293b;
-  font-feature-settings: 'clig' off, 'liga' off;
-  font-family: 'HK Grotesk';
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-.Quality-text {
-  padding: 5px;
-  border: solid #1e293b 2px;
-  color: #1e293b;
-  font-feature-settings: 'clig' off, 'liga' off;
-  font-family: 'HK Grotesk';
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  justify-self: center;
-  align-self: center;
-  margin: 10px;
-}
-.logOut-button {
-  color: #fff;
-  text-align: center;
-  font-family: 'HK Grotesk';
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px; /* 150% */
-  display: inline-flex;
-  padding: 8px 20px;
   align-items: center;
-  display: inline-flex;
-  padding: 8px 20px;
-  align-items: center;
-  margin-top: 50px;
+  margin-bottom: 24px;
+}
+
+.plan-type {
+  font-family: 'Roboto';
+  margin-left: 10px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  color: #1e293b;
+  border: 1px solid #1e293b;
+  border-radius: 2px;
+  padding: 2px 4px;
+  height: 22px;
+  width: 64px;
+}
+
+.logout-btn {
+  font-family: 'Roboto';
+  height: 50px;
+  width: 89px;
+  background: #e50914;
   border-radius: 4px;
-  background-color: #e50914;
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  align-self: center;
   border: none;
+  margin-top: 24px;
+  cursor: pointer;
+  outline: none;
+}
+@media (min-width: 768px) {
+  .account-container {
+    padding-left: 165px;
+    padding-right: 165px;
+    padding-top: 64px;
+  }
+
+  .heading {
+    margin-bottom: 24px;
+  }
+
+  .member-details {
+    margin-right: 24px;
+    font-size: 24px;
+    line-height: 31px;
+  }
+
+  .username {
+    font-size: 24px;
+    line-height: 31px;
+    margin-bottom: 13px;
+  }
+
+  .password {
+    font-size: 24px;
+    line-height: 31px;
+  }
+
+  .plan-type {
+    font-size: 18px;
+    line-height: 23px;
+    width: 79px;
+    height: 27px;
+  }
+
+  .logout-btn {
+    margin-top: 40px;
+  }
+}
+.footer-sec {
+  background-color: black;
 }

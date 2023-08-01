@@ -1,72 +1,118 @@
-import './index.css'
+import {Component} from 'react'
+import Cookies from 'js-cookie'
+import Loading from '../Loading'
+
 import Header from '../Header'
+import MovieItem from '../MovieItem'
+import FailureView from '../FailureView'
 
-const SearchInput = () => {
-  const searchInput = 'Avengers'
+import './index.css'
 
-  const notFoundMatches = () => (
-    <div className="not-found-matches-container">
-      <img
-        className="not-found-match-image"
-        src="https://res.cloudinary.com/dtghbuzfj/image/upload/v1690112554/Illustration_ci4zem.png"
-        alt="not found matches"
-      />
-      <p className="not-found-matches-text">
-        Your search for {searchInput} did not find any matches.
-      </p>
-    </div>
-  )
+const searchRoute = true
 
-  const searchResult = () => (
-    <div className="search-result-container">
-      <img
-        className="image"
-        src="https://res.cloudinary.com/dtghbuzfj/image/upload/v1641396198/cld-sample.jpg"
-        alt="popular"
-      />
-      <img
-        className="image"
-        src="https://res.cloudinary.com/dtghbuzfj/image/upload/v1641396198/cld-sample.jpg"
-        alt="popular"
-      />
-      <img
-        className="image"
-        src="https://res.cloudinary.com/dtghbuzfj/image/upload/v1641396198/cld-sample.jpg"
-        alt="popular"
-      />
-      <img
-        className="image"
-        src="https://res.cloudinary.com/dtghbuzfj/image/upload/v1641396198/cld-sample.jpg"
-        alt="popular"
-      />
-      <img
-        className="image"
-        src="https://res.cloudinary.com/dtghbuzfj/image/upload/v1641396198/cld-sample.jpg"
-        alt="popular"
-      />
-      <img
-        className="image"
-        src="https://res.cloudinary.com/dtghbuzfj/image/upload/v1641396198/cld-sample.jpg"
-        alt="popular"
-      />
-      <img
-        className="image"
-        src="https://res.cloudinary.com/dtghbuzfj/image/upload/v1641396198/cld-sample.jpg"
-        alt="popular"
-      />
-      <img
-        className="image"
-        src="https://res.cloudinary.com/dtghbuzfj/image/upload/v1641396198/cld-sample.jpg"
-        alt="popular"
-      />
-    </div>
-  )
-  return (
-    <div className="main-container">
-      <Header />
-      {notFoundMatches()}
-    </div>
-  )
+const renderConstraints = {
+  initial: 'INITIAL',
+  success: 'SUCCESS',
+  fail: 'FAIL',
+  loading: 'LOADING',
 }
 
-export default SearchInput
+class Search extends Component {
+  state = {
+    searchResultsList: [],
+    renderStatus: renderConstraints.initial,
+    searchValue: '',
+  }
+
+  getSearchMoviesData = async searchValue => {
+    this.setState({renderStatus: renderConstraints.loading})
+    const jwtToken = Cookies.get('jwt_token')
+    const searchApi = `https://apis.ccbp.in/movies-app/movies-search?search=${searchValue}`
+    const options = {
+      method: 'GET',
+      headers: {Authorization: `Bearer ${jwtToken}`},
+    }
+    const response = await fetch(searchApi, options)
+    if (response.ok) {
+      const data = await response.json()
+      const fetchedSearchMoviesData = data.results.map(eachMovie => ({
+        backdropPath: eachMovie.backdrop_path,
+        id: eachMovie.id,
+        posterPath: eachMovie.poster_path,
+        title: eachMovie.title,
+      }))
+      this.setState({
+        searchResultsList: fetchedSearchMoviesData,
+        renderStatus: renderConstraints.success,
+        searchValue,
+      })
+    } else {
+      this.setState({renderStatus: renderConstraints.fail})
+    }
+  }
+
+  renderSuccessView = () => {
+    const {searchResultsList} = this.state
+    return searchResultsList.length > 0 ? (
+      <ul className="search-items">
+        {searchResultsList.map(eachMovie => (
+          <MovieItem movieDetails={eachMovie} key={eachMovie.id} />
+        ))}
+      </ul>
+    ) : (
+      this.renderNoResultsView()
+    )
+  }
+
+  renderNoResultsView = () => {
+    const {searchValue} = this.state
+
+    return (
+      <div className="no-results-view">
+        <img
+          className="no-results-img"
+          alt="no movies"
+          src="https://res.cloudinary.com/dkbxi5qts/image/upload/v1660153718/movies%20prime%20app/No_Views_awtv8d.svg"
+        />
+        <p className="no-results-text">
+          Your search for {searchValue} did not find any matches.
+        </p>
+      </div>
+    )
+  }
+
+  renderLoaderView = () => <Loading />
+
+  tryAgainSearchData = () => {
+    this.getSearchMoviesData()
+  }
+
+  renderFailureView = () => <FailureView tryAgain={this.tryAgainSearchData} />
+
+  renderSwitchView = () => {
+    const {renderStatus} = this.state
+    switch (renderStatus) {
+      case renderConstraints.loading:
+        return this.renderLoaderView()
+      case renderConstraints.success:
+        return this.renderSuccessView()
+      case renderConstraints.fail:
+        return this.renderFailureView()
+      default:
+        return null
+    }
+  }
+
+  render() {
+    return (
+      <div className="bg-color">
+        <Header
+          getSearchMoviesData={this.getSearchMoviesData}
+          searchRoute={searchRoute}
+        />
+        <div className="search-container">{this.renderSwitchView()}</div>
+      </div>
+    )
+  }
+}
+export default Search

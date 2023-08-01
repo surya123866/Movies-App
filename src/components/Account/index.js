@@ -1,50 +1,46 @@
-import {Cookies} from 'js-cookie'
-import {withRouter} from 'react-router-dom'
-import './index.css'
-import Footer from '../Footer'
+import Cookies from 'js-cookie'
 import Header from '../Header'
+import Footer from '../Footer'
+
+import './index.css'
 
 const Account = props => {
-  const onClickLogOut = () => {
+  const onClickLogout = () => {
     Cookies.remove('jwt_token')
     const {history} = props
     history.replace('/login')
   }
   return (
-    <div className="main-container">
-      <Header />
-      <div className="account-container">
-        <div className="account-details-container">
-          <h1 className="header">Account</h1>
-          <hr className="line" />
-          <div className="memberShip-container">
-            <h1 className="membership-text">Member Ship</h1>
-            <div className="membership-details-container">
-              <p className="mail-text">surya@gmail.com</p>
-              <p className="password-text">Password: ********</p>
-            </div>
-          </div>
-          <hr className="line" />
-          <div className="plan-container">
-            <h1 className="planDetails-text">PlanDetails</h1>
-            <div className="plan-details-container">
-              <p className="plan-type-text">Premium</p>
-              <p className="Quality-text">Ultra HD</p>
-            </div>
-          </div>
-          <hr className="line" />
-          <button
-            type="button"
-            className="logOut-button"
-            onClick={onClickLogOut}
-          >
-            Logout
-          </button>
-        </div>
+    <>
+      <div className="header-sec">
+        <Header />
       </div>
-      <Footer />
-    </div>
+      <div className="account-container">
+        <h1 className="heading">Account</h1>
+        <hr className="hz-line" />
+        <div className="membership-container">
+          <p className="member-details">Member ship</p>
+          <div className="user-details">
+            <p className="username">suryakommanapalli80@gmail.com</p>
+            <p className="password">Password: **********</p>
+          </div>
+        </div>
+        <hr className="hz-line" />
+        <div className="plan-details-container">
+          <p className="member-details">Plan Details</p>
+          <p className="username">Premium</p>
+          <p className="plan-type">Ultra HD</p>
+        </div>
+        <hr className="hz-line" />
+        <button onClick={onClickLogout} type="button" className="logout-btn">
+          Logout
+        </button>
+      </div>
+      <div className="footer-sec">
+        <Footer />
+      </div>
+    </>
   )
 }
 
-export default withRouter(Account)
+export default Account

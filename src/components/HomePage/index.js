@@ -1,75 +1,127 @@
-import {Link} from 'react-router-dom'
-import {HiOutlineSearch} from 'react-icons/hi'
+import {Component} from 'react'
+import Cookies from 'js-cookie'
+import FailureView from '../FailureView'
+import Loading from '../Loading'
+import TrendingNow from '../TrendingNow'
+import Originals from '../Originals'
+
+import Header from '../Header'
+import Footer from '../Footer'
 
 import './index.css'
 
-import TrendingNow from '../TrendingNow'
-import Originals from '../Originals'
-import Footer from '../Footer'
+const apiStatusConstants = {
+  initial: 'INITIAL',
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+  inProgress: 'IN_PROGRESS',
+}
 
-const Home = () => {
-  const Header = () => (
-    <div className="Header-container">
-      <div className="Header-items-container">
-        <img
-          className="logo"
-          src="https://res.cloudinary.com/dtghbuzfj/image/upload/v1686377794/Group_7399_xuuhav.png"
-          alt="website logo"
-        />
-        <nav className="nav-menu">
-          <Link to="/" className="link">
-            <li className="list">
-              <p className="nav-link">Home</p>
-            </li>
-          </Link>
-          <Link to="/popular" className="link">
-            <li className="list">
-              <p className="nav-link">Popular</p>
-            </li>
-          </Link>
-        </nav>
-        <div className="avatar-search-container">
-          <Link to="/searchInput">
-            <HiOutlineSearch className="search-icon" />
-          </Link>
-          <div>
-            <Link to="/account" className="link">
-              <img
-                className="profile"
-                src="https://res.cloudinary.com/dtghbuzfj/image/upload/v1686459977/Avatar_pjoiug.png"
-                alt="Avatar"
-              />
-            </Link>
-          </div>
+class Home extends Component {
+  state = {
+    apiStatus: apiStatusConstants.initial,
+    randomHomePagePoster: {},
+  }
+
+  componentDidMount() {
+    this.getRandomHomePagePoster()
+  }
+
+  getRandomHomePagePoster = async () => {
+    this.setState({apiStatus: apiStatusConstants.inProgress})
+
+    const jwtToken = Cookies.get('jwt_token')
+    const homeApi = 'https://apis.ccbp.in/movies-app/trending-movies'
+    const options = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    }
+    const response = await fetch(homeApi, options)
+
+    if (response.ok === true) {
+      const data = await response.json()
+      const fetchedData = data.results.map(eachMovie => ({
+        id: eachMovie.id,
+        backdropPath: eachMovie.backdrop_path,
+        title: eachMovie.title,
+        overview: eachMovie.overview,
+        posterPath: eachMovie.poster_path,
+      }))
+      const randomNumber = Math.floor(Math.random() * fetchedData.length)
+
+      const randomMovie = fetchedData[randomNumber]
+      this.setState({
+        randomHomePagePoster: randomMovie,
+        apiStatus: apiStatusConstants.success,
+      })
+    } else {
+      this.setState({
+        apiStatus: apiStatusConstants.failure,
+      })
+    }
+  }
+
+  onClickRetry = () => {
+    this.getRandomHomePagePoster()
+  }
+
+  renderFailureView = () => <FailureView onClickRetry={this.onClickRetry} />
+
+  renderLoadingView = () => <Loading />
+
+  renderSuccessView = () => {
+    const {randomHomePagePoster} = this.state
+
+    const {title, backdropPath, overview} = randomHomePagePoster
+    console.log(title)
+    return (
+      <div
+        style={{backgroundImage: `url(${backdropPath})`}}
+        className="home-page"
+      >
+        <Header />
+        <div className="home-page-movie-container">
+          <h1 className="movie-title">{title}</h1>
+          <h1 className="over-view">{overview}</h1>
+          <button type="button" className="play-btn">
+            Play
+          </button>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 
-  const BannerContainer = () => (
-    <div className="Home-container">
-      {Header()}
-      <div>
-        <h1 className="movie-title">Super Man</h1>
-        <p className="movie-description">
-          Superman is a fictional superhero who first appeared in American comic
-          books published by DC Comics.
-        </p>
-        <button type="button" className="playButton">
-          Play
-        </button>
-      </div>
-      <div className="empty-rectangle">
-        <p />
-      </div>
-    </div>
-  )
+  renderHomePage = () => {
+    const {apiStatus} = this.state
 
-  return (
-    <div className="main-container">
-      {BannerContainer()}
-      <Footer />
-    </div>
-  )
+    switch (apiStatus) {
+      case apiStatusConstants.success:
+        return this.renderSuccessView()
+      case apiStatusConstants.failure:
+        return this.renderFailureView()
+      case apiStatusConstants.inProgress:
+        return this.renderLoadingView()
+      default:
+        return null
+    }
+  }
+
+  render() {
+    return (
+      <>
+        <div className="bg-container">
+          {this.renderHomePage()}
+          <h1 className="side-heading">Trending Now</h1>
+          <TrendingNow />
+          <h1 className="side-heading">Originals</h1>
+          <Originals />
+          <Footer />
+        </div>
+      </>
+    )
+  }
 }
+
 export default Home
